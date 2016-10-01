@@ -2,19 +2,9 @@
 
 						For Library Management System.
 
-Team Members:
-
-Animesh Sinsinwal: 	assinsin@ncsu.edu
-
-Prerit Bhandari: 	pbhanda2@ncsu.edu
-
-Gautami Khandekar: gmkhande@ncsu.edu
-
-GitHub Link: https://github.ncsu.edu/pbhanda2/LibraryManagement
-
 ================================MAIN LOGIN==============================
 
-Login Credentials: Super-Admin 
+Login Credentials: Super-Admin
 
 email: superadmin@ncsu.edu
 
@@ -116,4 +106,3 @@ Scope for this project
 3. Send email or notification to other members.
 
 4. Create an event function to book a room.
-
