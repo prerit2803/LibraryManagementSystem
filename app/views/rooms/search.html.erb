@@ -1,0 +1,23 @@
+<h4>Rooms Searching Engine</h4>
+<%= form_for @room do |f| %>
+    <p>
+      <%= f.label :room_no %><br>
+      <%= f.number_field :room_no %>
+    </p>
+
+    <p>
+      <%= f.label :size %><br>
+      <%= f.number_field :size %>
+    </p>
+    <p>
+      <%= f.label :lib_name %><br>
+      <%= f.text_field :lib_name %>
+    </p>
+    <p>
+      <%= f.label :Status %><br>
+      <%= f.select :status, [['Available','Available'],['Booked','Booked']] %>
+    </p>
+    <p>
+      <%= f.submit :"Search" %>
+    </p>
+<% end %>

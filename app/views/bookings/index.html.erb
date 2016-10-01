@@ -1,0 +1,58 @@
+<h2>Current Booking</h2>
+
+<table border='1' cellpadding='6'>
+
+  <tr>
+    <th>Name</th>
+    <th>Room No.</th>
+    <th>Group of</th>
+    <th>At</th>
+    <th>Booking Date</th>
+    <th>From </th>
+    <th>To </th>
+    <th>Booked On</th>
+    <th colspan='2'>Change/Delete</th>
+  </tr>
+
+  <% @bookings.each do |track| %>
+      <% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+          <tr>
+            <td><%= track.user.full_name %></td>
+            <td><%= track.room.room_no %></td>
+            <td><%= track.room.size %></td>
+            <td><%= track.room.lib_name %></td>
+            <td><%= track.b_date.strftime("%b %d, %Y") %></td>
+            <td><%= track.from_time.strftime("%H:%M") %></td>
+            <td><%= track.to_time.strftime("%H:%M") %></td>
+            <td><%= track.created_at.strftime("%b %d, %Y") %></td>
+            <td><%= link_to 'Change Booking', edit_booking_path(track) %></td>
+            <td><%= link_to 'Cancel Booking', booking_path(track), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+
+      <% else %>
+          <% if track.user_id == session[:user_id] %>
+              <tr>
+                <td><%= track.user.full_name %></td>
+                <td><%= track.room.room_no %></td>
+                <td><%= track.room.size %></td>
+                <td><%= track.room.lib_name %></td>
+                <% if !(track.user_id?) %>
+                    <td><%= track.b_date %></td>
+                    <td><%= track.from_time %></td>
+                    <td><%= track.to_time %></td>
+                    <td><%= track.created_at %></td>
+                <% else %>
+                    <td><%= track.b_date.strftime(" %b %d, %Y ") %></td>
+                    <td><%= track.from_time.strftime(" %H:%M ") %></td>
+                    <td><%= track.to_time.strftime(" %H:%M ") %></td>
+                    <td><%= track.created_at.strftime(" %b %d, %Y ") %></td>
+              <% end %>
+                <td><%= link_to 'Change Booking', edit_booking_path(track) %></td>
+                <td><%= link_to 'Cancel Booking', booking_path(track), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+          <% end %>
+
+      <% end %>
+  <% end %>
+</table>
+<br>

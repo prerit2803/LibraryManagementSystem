@@ -1,0 +1,31 @@
+<h1>Add Room</h1>
+
+<%= form_for @room do |f| %>
+
+    <p>
+      <%= f.label :room_no %>
+      <%= f.number_field :room_no , :min=>0, :max=>9999 %>
+    </p>
+
+    <p>
+      <%= f.label :size %>
+      <%= f.select :size, [[4,4],[6,6],[8,8]] %>
+    </p>
+
+
+    <p>
+      <%= f.label :lib_name %>
+      <%= f.select :lib_name, [['James.B.Hunt','James.B.Hunt'],['D.H.Hill','D.H.Hill']] %>
+    </p>
+
+
+    <p>
+      <%= f.label :status %><br>
+      <%= f.select :status, [['Available','Available'],['Rooom Under Construction','Not']] %>
+    </p>
+
+    <p>
+      <%= f.submit 'Add New Room' %>
+    </p>
+
+<% end %>

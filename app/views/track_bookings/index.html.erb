@@ -1,0 +1,55 @@
+<h2>Booking History</h2>
+
+<table border="1" cellpadding="6">
+  <tr>
+    <th>Booked For</th>
+    <th>Email</th>
+    <th>Room No</th>
+    <th>Library Name</th>
+    <th>From Time</th>
+    <th>To Time</th>
+    <th>Booked On</th>
+    <th>Status</th>
+    <th>Booked By</th>
+
+  </tr>
+  <% @trackbookings.each do |track| %>
+      <% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+          <tr>
+            <td><%= track.full_name %></td>
+            <td><%= track.email %></td>
+            <td><%= track.room_no %></td>
+            <td><%= track.lib_name %></td>
+            <td><%= track.from_time %></td>
+            <td><%= track.to_time %></td>
+            <td><%= track.created_at %></td>
+            <td><%= track.status %></td>
+            <% user = User.find_by(id: track.booked_by) %>
+            <td><%= user.full_name %></td>
+          </tr>
+
+      <% else %>
+          <% if track.email == session[:user_email] %>
+              <tr>
+                <td><%= track.full_name %></td>
+                <td><%= track.email %></td>
+                <td><%= track.room_no %></td>
+                <td><%= track.lib_name %></td>
+                <td><%= track.from_time %></td>
+                <td><%= track.to_time %></td>
+                <td><%= track.created_at %></td>
+                <td><%= track.status %></td>
+                <% user = User.find_by(id: track.booked_by) %>
+                <% if user.full_name == track.full_name %>
+                    <td>SELF</td>
+                <% else %>
+                    <td><%= user.full_name %></td>
+                <% end %>
+              </tr>
+          <% end %>
+
+          <% end %>
+  <% end %>
+</table>
+
+<br/>

@@ -1,0 +1,29 @@
+<h2>Room details</h2>
+<div>
+  <p>
+    <strong>Room No: </strong>
+    <%= @room.room_no %>
+  </p>
+
+  <p>
+    <strong>Size: </strong>
+    <%= @room.size %>
+  </p>
+
+  <p>
+    <strong>Library: </strong>
+    <%= @room.lib_name %>
+  </p>
+
+  <p>
+    <strong>Status: </strong>
+    <%= @room.status %>
+  </p>
+
+</div>
+
+<%= link_to 'Room List', rooms_path %>
+<% if (session[:user_usertype]==2) %>
+    <br/>
+    <%= link_to 'Check for Booking Availablility', new_booking_path %>
+<% end %>

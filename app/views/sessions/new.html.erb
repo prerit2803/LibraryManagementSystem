@@ -1,0 +1,18 @@
+<div class="row">
+  <div align="center">New user? <%= link_to "Sign up now!", signup_path %><br>
+  <h3>Log in</h3>
+  </div>
+  <div class="col-md-6 col-md-offset-3" align="center">
+    <%= form_for(:session, url: login_path) do |f| %>
+
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %><br>
+
+        <%= f.label :password %>
+        <%= f.password_field :password, :value =>'', class: 'form-control' %><br>
+
+        <%= f.submit "Log in", class: 'btn btn-primary' %><br>
+    <% end %>
+
+  </div>
+</div>

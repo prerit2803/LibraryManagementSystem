@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lib</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="header">
+  <h1>Library Management System</h1>
+  <i><h5 align="right" >Seeking a secure place to study? Lets reserve a Room ... </h5></i>
+</div>
+
+<div id="nav">
+  <% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+      <%= link_to 'Manage Users / Admins', controller: 'users' %> <br>
+      <%= link_to 'Manage Rooms', controller: 'rooms' %>&emsp;&emsp;&emsp;&emsp;&emsp;
+      <%= link_to 'Reserve Room for User', new_booking_path %><br>
+  <% else %>
+      <%= link_to 'Look for Room', controller: 'rooms' %>&emsp;&emsp;&emsp;&emsp;&emsp;
+      <%= link_to 'Directly Go for Booking', new_booking_path %><br>
+  <% end %>
+  <% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+      <%= link_to 'Current Bookings', controller: 'bookings' %>&emsp;&emsp;&emsp;&emsp;
+      <%= link_to 'Past Bookings', controller: 'track_bookings' %><br>
+<% else %>
+      <%= link_to 'Current Booking', controller: 'bookings' %>&emsp;&emsp;&emsp;&emsp;
+      <%= link_to 'Past Bookings', controller: 'track_bookings' %><br>
+  <% end %>
+  <%= link_to "Update Profile", edit_user_path(current_user) %><br>
+
+
+  <%= link_to "Logout", logout_path, method: "delete" %><br>
+
+  <%= yield %>
+
+  <div id="footer">
+    Developed and Maintained by Animesh, Prerit & Gautami
+  </div>
+</div>
+</body>
+</html>

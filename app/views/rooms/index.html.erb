@@ -1,0 +1,50 @@
+<h2>Room list and Search</h2>
+<%= form_tag rooms_path, :method => 'get' do %>
+    <p>
+      Enter Room No., Size, Library Name or Status<br>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search" %>
+    </p>
+<% end %>
+<table border ="1" cellpadding="10">
+  <tr>
+    <th>Room No. </th>
+    <th>Size </th>
+    <th>Library Name </th>
+    <th colspan="5">Tasks</th>
+  </tr>
+
+  <% @rooms.each do |room| %>
+      <tr>
+        <td><%= room.room_no %></td>
+        <td><%= room.size %></td>
+        <td><%= room.lib_name %></td>
+        <td><%= link_to 'Show', room_path(room) %></td>
+        <% if (session[:user_usertype] == 1 ||session[:user_usertype] == 0) %>
+            <td><%= link_to 'Edit', edit_room_path(room) %></td>
+
+            <% if room.status == "Available" || room.status == "Not" %>
+                <td><%= link_to 'Delete', room_path(room),
+                                method: :delete,
+                                data: { confirm: 'Are you sure?' } %></td>
+            <% else %>
+                <td> The Room is Booked. </td>
+            <% end %>
+        <% end %>
+        <% if room.status == "Available" || room.status =="Booked" %>
+            <td>Booking Available</td>
+        <% end %>
+        <% if room.status == 'Not'%>
+            <td>Not in Use</td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>
+<% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+    <br/></br>
+    <%= link_to 'Add New Room', new_room_path, :class=>"buttonDesign" %><br>
+    <%= link_to 'Book Room for User', new_booking_path %>
+<% else %>
+    <br/><br/>
+    <%= link_to 'Go For Booking', new_booking_path %>
+<% end %>

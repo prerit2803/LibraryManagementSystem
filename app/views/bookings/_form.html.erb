@@ -1,0 +1,44 @@
+<%= form_for(booking) do |f| %>
+  <% if booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+
+      <ul>
+      <% booking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :b_date %>
+    <%= f.date_select :b_date, {:default => {:start_year=>Time.now.year}, :end_year=>Time.now.year} %>
+  </p>
+
+  <p>
+    <%= f.label :from_time %>
+    <%= f.time_select :from_time, {:default => (Time.now.beginning_of_hour + 60.minutes)} %>
+  </p>
+
+  <p>
+    <%= f.label :to_time %>
+    <%= f.time_select :to_time, {:default => (Time.now.beginning_of_hour + 120.minutes)} %>
+  </p>
+
+    <p>
+      <%= f.label :room %><br />
+      <%= select("booking", "room_id", Room.all.collect{ |r| [ r.room_no, r.id] }) %>
+    </p>
+
+    <% if (session[:user_usertype] == 1 ||session[:user_usertype] == 0) %>
+        <p>
+          <%= f.label :user %><br />
+          <%= select("booking", "user_id", User.all.collect{ |u| [ u.full_name, u.id] }) %>
+        </p>
+    <% end %>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
